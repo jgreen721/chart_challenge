@@ -131,6 +131,7 @@
         align-items: center;
         justify-content: flex-end;
         margin: 0px 4px;
+        position: relative;
       }
 
       .chart-parent {
@@ -155,11 +156,20 @@
       .large {
         background: hsl(186, 34%, 60%);
       }
-      
-      .chart-div:hover::after{
-        content:attr(data-total)
-        position:absolute;
-        width:50px;
+
+      .chart-div:hover::after {
+        content: "$" attr(data-total);
+        position: absolute;
+        width: 50px;
+        top: 20%;
+        opacity: 0;
+        animation: fadein 2s forwards;
+      }
+
+      @keyframes fadein {
+        100% {
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -219,7 +229,7 @@
           res.forEach((r) => {
             var chartDiv = document.createElement("div");
             chartDiv.className = "chart-div";
-            chartDiv.setAttribute("data-total",r.amount)
+            chartDiv.setAttribute("data-total", r.amount);
             if (r.day === id.day) {
               chartDiv.innerHTML = `<div class='chart-parent'><div class='chart large' style='height:${
                 r.amount * 2
