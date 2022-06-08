@@ -155,6 +155,12 @@
       .large {
         background: hsl(186, 34%, 60%);
       }
+      
+      .chart-div:hover::after{
+        content:attr(data-total)
+        position:absolute;
+        width:50px;
+      }
     </style>
   </head>
   <body>
@@ -213,6 +219,7 @@
           res.forEach((r) => {
             var chartDiv = document.createElement("div");
             chartDiv.className = "chart-div";
+            chartDiv.setAttribute("data-total",r.amount)
             if (r.day === id.day) {
               chartDiv.innerHTML = `<div class='chart-parent'><div class='chart large' style='height:${
                 r.amount * 2
